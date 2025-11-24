@@ -40,7 +40,7 @@ public:
         return tail_Node->retrieve();
     }
 
-    // ✅ DISPLAY FORWARD
+    //  DISPLAY FORWARD
     void display() const {
         Node* temp = head_Node;
         while (temp != nullptr) {
@@ -50,7 +50,7 @@ public:
         cout << endl;
     }
 
-    // ✅ DISPLAY BACKWARD
+    //  DISPLAY BACKWARD
     void reverse_display() const {
         Node* temp = tail_Node;
         while (temp != nullptr) {
@@ -60,7 +60,7 @@ public:
         cout << endl;
     }
 
-    // ✅ SIZE
+    //  SIZE
     int size() const {
         int count = 0;
         Node* temp = head_Node;
@@ -71,7 +71,7 @@ public:
         return count;
     }
 
-    // ✅ COUNT ELEMENTS
+    //  COUNT ELEMENTS
     int count(int n) const {
         int c = 0;
         Node* temp = head_Node;
@@ -82,7 +82,7 @@ public:
         return c;
     }
 
-    // ✅ PUSH FRONT
+    //  PUSH FRONT
     void push_front(int n) {
         Node* newNode = new Node(n, head_Node, nullptr);
 
@@ -94,7 +94,7 @@ public:
         }
     }
 
-    // ✅ PUSH END
+    //  PUSH END
     void push_end(int n) {
         Node* newNode = new Node(n, nullptr, tail_Node);
 
@@ -106,7 +106,7 @@ public:
         }
     }
 
-    // ✅ POP FRONT
+    //  POP FRONT
     int pop_front() {
         if (empty()) throw "Underflow!";
 
@@ -124,7 +124,7 @@ public:
         return val;
     }
 
-    // ✅ POP END
+    //  POP END
     void pop_end() {
         if (empty()) throw "Underflow!";
 
@@ -140,7 +140,7 @@ public:
         delete temp;
     }
 
-    // ✅ ERASE ALL OCCURRENCES
+    //  ERASE ALL OCCURRENCES
     int erase(int n) {
         if (empty()) throw "Underflow!";
 
@@ -175,7 +175,7 @@ public:
         return removed;
     }
 
-    // ✅ Destructor
+    //  Destructor
     ~D_list() {
         while (!empty())
             pop_front();
@@ -183,7 +183,7 @@ public:
 };
 
 
-// ✅ MAIN
+//  MAIN
 int main() {
     D_list l;
 

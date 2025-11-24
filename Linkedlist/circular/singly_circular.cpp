@@ -31,7 +31,7 @@ public:
         return list_Head->retrieve();
     }
 
-    // ✅ DISPLAY (Circular safe)
+    //  DISPLAY (Circular safe)
     void display() const {
         if (empty()) {
             cout << "List is empty\n";
@@ -45,7 +45,7 @@ public:
         cout << endl;
     }
 
-    // ✅ SIZE
+    //  SIZE
     int size() const {
         if (empty()) return 0;
         int count = 0;
@@ -57,7 +57,7 @@ public:
         return count;
     }
 
-    // ✅ COUNT occurrences
+    //  COUNT occurrences
     int count(int n) const {
         if (empty()) return 0;
         int c = 0;
@@ -70,7 +70,7 @@ public:
         return c;
     }
 
-    // ✅ END element
+    //  END element
     int end() const {
         if (empty()) throw "Underflow!";
         Node* temp = list_Head;
@@ -79,7 +79,7 @@ public:
         return temp->retrieve();
     }
 
-    // ✅ PUSH_FRONT (Circular version)
+    //  PUSH_FRONT (Circular version)
     void push_front(int n) {
         if (empty()) {
             list_Head = new Node(n, nullptr);
@@ -96,7 +96,7 @@ public:
         }
     }
 
-    // ✅ PUSH_END (Circular version)
+    //  PUSH_END (Circular version)
     void push_end(int n) {
         if (empty()) {
             list_Head = new Node(n, nullptr);
@@ -110,7 +110,7 @@ public:
         }
     }
 
-    // ✅ POP_FRONT
+    //  POP_FRONT
     int pop_front() {
         if (empty()) throw "Underflow!";
 
@@ -134,7 +134,7 @@ public:
         return val;
     }
 
-    // ✅ POP_END
+    //  POP_END
     void pop_end() {
         if (empty()) throw "Underflow!";
 
@@ -157,7 +157,7 @@ public:
         delete curr;
     }
 
-    // ✅ ERASE ALL OCCURRENCES of a value
+    //  ERASE ALL OCCURRENCES of a value
     int erase(int n) {
         if (empty()) throw "Underflow!";
 
@@ -190,7 +190,7 @@ public:
         return removed;
     }
 
-    // ✅ Destructor
+    //  Destructor
     ~S_list() {
         while (!empty())
             pop_front();
@@ -198,7 +198,7 @@ public:
 };
 
 
-// ✅ MAIN
+//  MAIN
 int main() {
     S_list l;
     l.push_end(1);

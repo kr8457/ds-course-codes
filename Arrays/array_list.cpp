@@ -3,12 +3,12 @@ using namespace std;
 
 template<typename T, size_t size>
 class list {
-    T arr[size];     // this must be T, not int
-    size_t N;        // current filled elements
+    T arr[size];     
+    size_t N;        
 
 public:
 
-    // constructor that accepts any-sized array (≤ size)
+    
     template<size_t N2>
     list(T (&a)[N2]) {
         static_assert(N2 <= size, "Array too big!");
