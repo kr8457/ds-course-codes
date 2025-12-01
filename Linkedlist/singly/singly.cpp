@@ -1,103 +1,108 @@
 #include<iostream>
 using namespace std;
 
-class Node{
-    private:
-    int element;
-    Node* next_Node;
-    public:
-    Node(int e,Node* n ):element(e),next_Node(n){};
+template <typename T>
+class Node {
+private:
+    T element;
+    Node<T>* next_Node;
 
+public:
+    Node(T e, Node<T>* n) : element(e), next_Node(n) {}
 
-    void setelement(int e)
-    {
+    void setelement(T e) {
         element = e;
     }
-    void setnext(Node *n)
-    {
-        next_Node=n;
+
+    void setnext(Node<T>* n) {
+        next_Node = n;
     }
-    int retrieve()const
-    {
+
+    T retrieve() const {
         return element;
     }
-    Node* next()const{
+
+    Node<T>* next() const {
         return next_Node;
     }
 };
 
-class S_list{
-    private:
-    Node* list_Head;
-    public:
-    S_list():list_Head(nullptr){};
-      
+template <typename T>
+class S_list {
+private:
+    Node<T>* list_Head;
+
+public:
+    S_list() : list_Head(nullptr) {}
+
     bool empty() const;
-        Node *head() const;
-        int front() const;
-        void display() const;
-        int size() const;
-        int count(int) const;
-        int end() const;
-        
-        
-        void push_front(int);
-        int pop_front();
-        void push_end(int);
-        void pop_end();
-        int erase(int);
+    Node<T>* head() const;
+    T front() const;
+    void display() const;
+    int size() const;
+    int count(T) const;
+    
+    T end() const;
+    void push_front(T);
+    T pop_front();
+    void push_end(T);
+    void pop_end();
+    int erase(T);
 
     ~S_list() {
-         while (!empty())
-              pop_front();
-        }
-
-
-    };
-
-
-int S_list::erase(int n)
-{
-    if (empty()) 
-        throw "Underflow";
-
-    Node* ptr = list_Head;
-    Node* prev = nullptr;
-    int count = 0;
-
-    while (ptr != nullptr)
-    {
-        if (ptr->retrieve() == n)
-        {
-            // delete head node
-            if (prev == nullptr)
-            {
-                list_Head = ptr->next();
-                delete ptr;
-                ptr = list_Head;
-            }
-            else
-            {
-                prev->setnext(ptr->next());
-                delete ptr;
-                ptr = prev->next();
-            }
-            count++;
-        }
-        else
-        {
-            prev = ptr;
-            ptr = ptr->next();
-        }
+        while (!empty())
+            pop_front();
     }
+};
 
-    return count;
+template <typename T>
+bool S_list<T>::empty() const {
+    return list_Head == nullptr;
 }
 
-  
+template <typename T>
+Node<T>* S_list<T>::head() const {
+    return list_Head;
+}
 
-void S_list::pop_end(){
-   if (empty()) throw "Underflow";
+template <typename T>
+T S_list<T>::front() const {
+    if (empty()) throw "Underflow";
+    return list_Head->retrieve();
+}
+
+template <typename T>
+void S_list<T>::push_front(T n) {
+    list_Head = new Node<T>(n, head());
+}
+
+template <typename T>
+void S_list<T>::push_end(T n) {
+    if (empty()) {
+        push_front(n);
+    } else {
+        Node<T>* temp = list_Head;
+        while (temp->next() != nullptr)
+            temp = temp->next();
+
+        temp->setnext(new Node<T>(n, nullptr));
+    }
+}
+
+template <typename T>
+T S_list<T>::pop_front() {
+    if (empty()) throw "Underflow";
+
+    Node<T>* temp = list_Head;
+    T val = temp->retrieve();
+    list_Head = temp->next();
+    delete temp;
+    return val;
+}
+
+template <typename T>
+void S_list<T>::pop_end() {
+    if (empty()) throw "Underflow";
 
     if (list_Head->next() == nullptr) {
         delete list_Head;
@@ -105,7 +110,7 @@ void S_list::pop_end(){
         return;
     }
 
-    Node* temp = list_Head;
+    Node<T>* temp = list_Head;
     while (temp->next()->next() != nullptr)
         temp = temp->next();
 
@@ -113,124 +118,100 @@ void S_list::pop_end(){
     temp->setnext(nullptr);
 }
 
-    
+template <typename T>
+T S_list<T>::end() const {
+    if (empty()) throw "Underflow";
 
-int S_list::pop_front(){
-    if (empty())
-        throw "Underflow";
-    Node* temp = list_Head;
-    int val = temp->retrieve();
-    list_Head = temp->next();
-    delete temp;
-    return val;
+    Node<T>* temp = list_Head;
+    while (temp->next() != nullptr)
+        temp = temp->next();
 
-}   
-
-int S_list:: end() const
-    {
-      Node* temp = list_Head;   // make a traversal pointer
-    while (temp->next() != nullptr) { // loop until end of list
-       
-        temp = temp->next();    // move to next node
-    }
-     return temp->retrieve();
-    };   
-int S_list::size() const
- {  
-    int count =0;
-    Node* temp = list_Head;   // make a traversal pointer
-    while (temp != nullptr) { // loop until end of list
-        count += 1;
-        temp = temp->next();    // move to next node
-    }
-    return count;
- }    
-int S_list::count(int n) const
- {  
-    int count =0;
-    Node* temp = list_Head;   // make a traversal pointer
-    while (temp != nullptr) { // loop until end of list
-        if(temp->retrieve()==n)
-            {
-                count += 1;
-            }   
-        temp = temp->next();    // move to next node
-    }
-    return count;
- }    
-bool S_list:: empty()const
-    {
-
-    return list_Head==nullptr;
-    }
-
-    Node* S_list::head()const{
-        return list_Head;
-    }
-
-int S_list::front()const
-    {
-   if(empty())
-    {
-        throw "Under flow";
-    }
-    else;
-    return list_Head->retrieve();
-    }    
-void S_list::push_front(int n)
-    {
-       list_Head=  new Node(n,head());
-    }
-
-void S_list::push_end(int n)
-{
-    if(empty())
-    {
-      push_front(n);
-    }
-    else
-    {
-         Node* temp = list_Head;   // make a traversal pointer
-    while (temp->next()!= nullptr) 
-        { // loop until end of list
-        
-         temp = temp->next();    // move to next node
-        }
-        temp->setnext(new Node(n,nullptr));
-    }
+    return temp->retrieve();
 }
 
-void S_list::display() const 
-    {
-    Node* temp = list_Head;   // make a traversal pointer
-    while (temp != nullptr) { // loop until end of list
-        cout << " " << temp->retrieve();
-        temp = temp->next();    // move to next node
+template <typename T>
+int S_list<T>::size() const {
+    int count = 0;
+    Node<T>* temp = list_Head;
+
+    while (temp != nullptr) {
+        count++;
+        temp = temp->next();
+    }
+    return count;
+}
+
+template <typename T>
+int S_list<T>::count(T n) const {
+    int cnt = 0;
+    Node<T>* temp = list_Head;
+
+    while (temp != nullptr) {
+        if (temp->retrieve() == n)
+            cnt++;
+
+        temp = temp->next();
+    }
+    return cnt;
+}
+
+template <typename T>
+int S_list<T>::erase(T n) {
+    if (empty())
+        throw "Underflow";
+
+    Node<T>* ptr = list_Head;
+    Node<T>* prev = nullptr;
+    int count = 0;
+
+    while (ptr != nullptr) {
+        if (ptr->retrieve() == n) {
+            if (prev == nullptr) {
+                list_Head = ptr->next();
+                delete ptr;
+                ptr = list_Head;
+            } else {
+                prev->setnext(ptr->next());
+                delete ptr;
+                ptr = prev->next();
+            }
+            count++;
+        } else {
+            prev = ptr;
+            ptr = ptr->next();
+        }
+    }
+    return count;
+}
+
+template <typename T>
+void S_list<T>::display() const {
+    Node<T>* temp = list_Head;
+    while (temp != nullptr) {
+        cout << temp->retrieve() << " ";
+        temp = temp->next();
     }
     cout << endl;
-    }
+}
 
+int main() {
+    S_list<int> l;
 
-
-int main()
-    {
-
-    S_list l;
     l.push_end(12);
     l.push_front(1);
-     l.push_front(12);
     l.push_front(12);
-     l.push_front(12);
     l.push_front(12);
-     l.display();
-    cout<<"size is:"<<l.size()<<endl;
-    cout<<"count of n is:"<<l.count(0)<<endl;
-    cout<<"front is :"<<l.front()<<endl;
-    cout<<"end is:"<<l.end()<<endl;
-   // l.pop_front();
-    //l.pop_end();
-    cout<<l.erase(12)<<endl;
-   cout<<"at the end "<< endl;
+
     l.display();
+    cout << "Size: " << l.size() << endl;
+    cout << "Count: " << l.count(12) << endl;
+    cout << "Front: " << l.front() << endl;
+    cout << "End: " << l.end() << endl;
+
+    cout << "Erased: " << l.erase(12) << endl;
+
+    cout << "After erase: ";
+    l.display();
+
     return 0;
-    }
+}

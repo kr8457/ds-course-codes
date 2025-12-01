@@ -1,48 +1,52 @@
 #include<iostream>
 using namespace std;
 
+// ================= TEMPLATE NODE =================
+template <typename T>
 class Node {
 private:
-    int element;
-    Node* next_Node;
-    Node* prev_Node;
+    T element;
+    Node<T>* next_Node;
+    Node<T>* prev_Node;
 
 public:
-    Node(int e, Node* n = nullptr, Node* p = nullptr)
+    Node(T e, Node<T>* n = nullptr, Node<T>* p = nullptr)
         : element(e), next_Node(n), prev_Node(p) {}
 
-    void setelement(int e) { element = e; }
-    void setnext(Node* n) { next_Node = n; }
-    void setprev(Node* p) { prev_Node = p; }
+    void setelement(T e) { element = e; }
+    void setnext(Node<T>* n) { next_Node = n; }
+    void setprev(Node<T>* p) { prev_Node = p; }
 
-    int retrieve() const { return element; }
-    Node* next() const { return next_Node; }
-    Node* prev() const { return prev_Node; }
+    T retrieve() const { return element; }
+    Node<T>* next() const { return next_Node; }
+    Node<T>* prev() const { return prev_Node; }
 };
 
+// ================= TEMPLATE DOUBLY LINKED LIST =================
+template <typename T>
 class D_list {
 private:
-    Node* head_Node;
-    Node* tail_Node;
+    Node<T>* head_Node;
+    Node<T>* tail_Node;
 
 public:
     D_list() : head_Node(nullptr), tail_Node(nullptr) {}
 
     bool empty() const { return head_Node == nullptr; }
 
-    int front() const {
+    T front() const {
         if (empty()) throw "Underflow!";
         return head_Node->retrieve();
     }
 
-    int end() const {
+    T end() const {
         if (empty()) throw "Underflow!";
         return tail_Node->retrieve();
     }
 
-    //  DISPLAY FORWARD
+    // Display forward
     void display() const {
-        Node* temp = head_Node;
+        Node<T>* temp = head_Node;
         while (temp != nullptr) {
             cout << " " << temp->retrieve();
             temp = temp->next();
@@ -50,9 +54,9 @@ public:
         cout << endl;
     }
 
-    //  DISPLAY BACKWARD
+    // Display backward
     void reverse_display() const {
-        Node* temp = tail_Node;
+        Node<T>* temp = tail_Node;
         while (temp != nullptr) {
             cout << " " << temp->retrieve();
             temp = temp->prev();
@@ -60,10 +64,10 @@ public:
         cout << endl;
     }
 
-    //  SIZE
+    // Size
     int size() const {
         int count = 0;
-        Node* temp = head_Node;
+        Node<T>* temp = head_Node;
         while (temp != nullptr) {
             count++;
             temp = temp->next();
@@ -71,51 +75,55 @@ public:
         return count;
     }
 
-    //  COUNT ELEMENTS
-    int count(int n) const {
+    // Count occurrences
+    int count(T n) const {
         int c = 0;
-        Node* temp = head_Node;
+        Node<T>* temp = head_Node;
         while (temp != nullptr) {
-            if (temp->retrieve() == n) c++;
+            if (temp->retrieve() == n)
+                c++;
             temp = temp->next();
         }
         return c;
     }
 
-    //  PUSH FRONT
-    void push_front(int n) {
-        Node* newNode = new Node(n, head_Node, nullptr);
+    // Push front
+    void push_front(T n) {
+        Node<T>* newNode = new Node<T>(n, head_Node, nullptr);
 
         if (empty()) {
             head_Node = tail_Node = newNode;
-        } else {
+        }
+        else {
             head_Node->setprev(newNode);
             head_Node = newNode;
         }
     }
 
-    //  PUSH END
-    void push_end(int n) {
-        Node* newNode = new Node(n, nullptr, tail_Node);
+    // Push end
+    void push_end(T n) {
+        Node<T>* newNode = new Node<T>(n, nullptr, tail_Node);
 
         if (empty()) {
             head_Node = tail_Node = newNode;
-        } else {
+        }
+        else {
             tail_Node->setnext(newNode);
             tail_Node = newNode;
         }
     }
 
-    //  POP FRONT
-    int pop_front() {
+    // Pop front
+    T pop_front() {
         if (empty()) throw "Underflow!";
 
-        int val = head_Node->retrieve();
-        Node* temp = head_Node;
+        T val = head_Node->retrieve();
+        Node<T>* temp = head_Node;
 
         if (head_Node == tail_Node) {
             head_Node = tail_Node = nullptr;
-        } else {
+        }
+        else {
             head_Node = head_Node->next();
             head_Node->setprev(nullptr);
         }
@@ -124,15 +132,16 @@ public:
         return val;
     }
 
-    //  POP END
+    // Pop end
     void pop_end() {
         if (empty()) throw "Underflow!";
 
-        Node* temp = tail_Node;
+        Node<T>* temp = tail_Node;
 
         if (head_Node == tail_Node) {
             head_Node = tail_Node = nullptr;
-        } else {
+        }
+        else {
             tail_Node = tail_Node->prev();
             tail_Node->setnext(nullptr);
         }
@@ -140,23 +149,21 @@ public:
         delete temp;
     }
 
-    //  ERASE ALL OCCURRENCES
-    int erase(int n) {
+    // Erase all occurrences of value
+    int erase(T n) {
         if (empty()) throw "Underflow!";
 
         int removed = 0;
-        Node* curr = head_Node;
+        Node<T>* curr = head_Node;
 
         while (curr != nullptr) {
             if (curr->retrieve() == n) {
-                Node* nextNode = curr->next();
-                Node* prevNode = curr->prev();
+                Node<T>* nextNode = curr->next();
+                Node<T>* prevNode = curr->prev();
 
-                // Removing head
                 if (curr == head_Node)
                     head_Node = nextNode;
 
-                // Removing tail
                 if (curr == tail_Node)
                     tail_Node = prevNode;
 
@@ -175,7 +182,7 @@ public:
         return removed;
     }
 
-    //  Destructor
+    // Destructor
     ~D_list() {
         while (!empty())
             pop_front();
@@ -183,9 +190,10 @@ public:
 };
 
 
-//  MAIN
+// ================= MAIN (TESTING) =================
 int main() {
-    D_list l;
+
+    D_list<int> l;
 
     l.push_end(1);
     l.push_front(1);
