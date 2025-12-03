@@ -1,7 +1,9 @@
 #include <iostream>
+#include <string>
+#include <algorithm>
 #include "Queue.h"
 #include "S_list.h"
-using namespace std;
+// Use explicit std:: qualifiers instead of `using namespace std;`
 
 template <typename Type>
 class Simple_tree {
@@ -82,7 +84,7 @@ public:
     }
 
     void depth_first_traversal() const {
-        cout << retrieve() << "\t";
+        std::cout << retrieve() << "\t";
         for (Node<Simple_tree*>* ptr = children.head(); ptr != NULL; ptr = ptr->next())
             ptr->retrieve()->depth_first_traversal();
     }
@@ -93,7 +95,7 @@ public:
 
         while (!q.empty()) {
             Simple_tree* p = q.dequeue();
-            cout << p->retrieve() << "\t";
+            std::cout << p->retrieve() << "\t";
 
             for (Node<Simple_tree*>* ptr = p->children.head(); ptr != NULL; ptr = ptr->next())
                 q.enqueue(ptr->retrieve());
@@ -102,24 +104,35 @@ public:
 
 };
 
-int main() {
    
 
-    Simple_tree<char> root('A');
-    root.insert('B');
-    root.insert('C');
+int main() {
+    // Build a tree with the name "Khalid Rafique"
+    Simple_tree<std::string> root("Khalid Rafique");
+    root.insert("Khalid");
+    root.insert("Rafique");
 
-    root.child(1)->insert('D');
-    root.child(1)->insert('E');
-    root.child(2)->insert('F');
+    // Add individual letters as children of 'Khalid'
+    std::string first = "Khalid";
+    for (char c : first) {
+        std::string s(1, c);
+        root.child(1)->insert(s);
+    }
 
-    cout << "Depth-first traversal: ";
+    // Add individual letters as children of 'Rafique'
+    std::string second = "Rafique";
+    for (char c : second) {
+        std::string s(1, c);
+        root.child(2)->insert(s);
+    }
+
+    std::cout << "Depth-first traversal of name-tree: ";
     root.depth_first_traversal();
-    cout << endl;
+    std::cout << std::endl;
 
-    cout << "Breadth-first traversal: ";
+    std::cout << "Breadth-first traversal of name-tree: ";
     root.breadth_first_traversal();
-    cout << endl;
+    std::cout << std::endl;
 
     return 0;
 }

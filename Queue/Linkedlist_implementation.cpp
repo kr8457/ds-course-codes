@@ -1,5 +1,4 @@
 #include<iostream>
-using namespace std;
 
 class Node {
 private:
@@ -112,10 +111,10 @@ int main() {
     q.enqueue(20);
     q.enqueue(30);
 
-    cout << "Front: " << q.front() << endl;
-    cout << "Dequeue: " << q.dequeue() << endl;
-    cout << "Front After Dequeue: " << q.front() << endl;
-    cout << "Size: " << q.size() << endl;
+    std::cout << "Front: " << q.front() << std::endl;
+    std::cout << "Dequeue: " << q.dequeue() << std::endl;
+    std::cout << "Front After Dequeue: " << q.front() << std::endl;
+    std::cout << "Size: " << q.size() << std::endl;
 
     return 0;
 }

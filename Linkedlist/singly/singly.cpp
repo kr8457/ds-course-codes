@@ -1,5 +1,4 @@
 #include<iostream>
-using namespace std;
 
 template <typename T>
 class Node {
@@ -188,10 +187,10 @@ template <typename T>
 void S_list<T>::display() const {
     Node<T>* temp = list_Head;
     while (temp != nullptr) {
-        cout << temp->retrieve() << " ";
+        std::cout << temp->retrieve() << " ";
         temp = temp->next();
     }
-    cout << endl;
+    std::cout << std::endl;
 }
 
 int main() {
@@ -203,14 +202,14 @@ int main() {
     l.push_front(12);
 
     l.display();
-    cout << "Size: " << l.size() << endl;
-    cout << "Count: " << l.count(12) << endl;
-    cout << "Front: " << l.front() << endl;
-    cout << "End: " << l.end() << endl;
+    std::cout << "Size: " << l.size() << std::endl;
+    std::cout << "Count: " << l.count(12) << std::endl;
+    std::cout << "Front: " << l.front() << std::endl;
+    std::cout << "End: " << l.end() << std::endl;
 
-    cout << "Erased: " << l.erase(12) << endl;
+    std::cout << "Erased: " << l.erase(12) << std::endl;
 
-    cout << "After erase: ";
+    std::cout << "After erase: ";
     l.display();
 
     return 0;

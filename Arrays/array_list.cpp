@@ -1,5 +1,4 @@
 #include <iostream>
-using namespace std;
 
 template<typename T, size_t size>
 class list {
@@ -56,13 +55,13 @@ public:
         for (size_t i = 0; i < N; i++)
             if (arr[i] == value) idx = i;
 
-        cout << "location is: " << idx << endl;
+        std::cout << "location is: " << idx << std::endl;
     }
 
     void display() {
         for (size_t i = 0; i < N; i++)
-            cout << arr[i] << " ";
-        cout << "\n-------------------------\n";
+            std::cout << arr[i] << " ";
+        std::cout << "\n-------------------------\n";
     }
 };
 

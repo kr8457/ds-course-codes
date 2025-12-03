@@ -1,5 +1,4 @@
 #include<iostream>
-using namespace std;
 
 template <typename T>
 class Node {
@@ -46,10 +45,10 @@ public:
         if (empty()) return;
         Node<T>* temp = head_Node;
         do {
-            cout << " " << temp->retrieve();
+            std::cout << " " << temp->retrieve();
             temp = temp->next();
         } while (temp != head_Node);
-        cout << endl;
+        std::cout << std::endl;
     }
 
     void reverse_display() const {
@@ -57,10 +56,10 @@ public:
         Node<T>* temp = head_Node->prev();
         Node<T>* tail = temp;
         do {
-            cout << " " << temp->retrieve();
+            std::cout << " " << temp->retrieve();
             temp = temp->prev();
         } while (temp != tail);
-        cout << endl;
+        std::cout << std::endl;
     }
 
     int size() const {
@@ -213,10 +212,10 @@ int main() {
     l.display();
     l.reverse_display();
 
-    cout << "Size: " << l.size() << endl;
-    cout << "Count of 1: " << l.count(1) << endl;
-    cout << "Front: " << l.front() << endl;
-    cout << "End: " << l.end() << endl;
+    std::cout << "Size: " << l.size() << std::endl;
+    std::cout << "Count of 1: " << l.count(1) << std::endl;
+    std::cout << "Front: " << l.front() << std::endl;
+    std::cout << "End: " << l.end() << std::endl;
 
     l.erase(1);
 

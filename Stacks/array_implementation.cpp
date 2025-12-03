@@ -1,5 +1,4 @@
 #include<iostream>
-using namespace std;
 
 class Stack_Array {
 private:
@@ -46,10 +45,10 @@ int main() {
     s.push(10);
     s.push(15);
 
-    cout << "Top: " << s.top() << endl;
-    cout << "Pop: " << s.pop() << endl;
-    cout << "New Top: " << s.top() << endl;
-    cout << "Size: " << s.size() << endl;
+    std::cout << "Top: " << s.top() << std::endl;
+    std::cout << "Pop: " << s.pop() << std::endl;
+    std::cout << "New Top: " << s.top() << std::endl;
+    std::cout << "Size: " << s.size() << std::endl;
 
     return 0;
 }

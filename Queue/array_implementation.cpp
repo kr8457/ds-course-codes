@@ -1,5 +1,4 @@
 #include<iostream>
-using namespace std;
 
 class Queue_Array {
 private:
@@ -46,10 +45,10 @@ int main() {
     q.enqueue(10);
     q.enqueue(15);
 
-    cout << "Front: " << q.front() << endl;
-    cout << "Dequeue: " << q.dequeue() << endl;
-    cout << "New Front: " << q.front() << endl;
-    cout << "Size: " << q.size() << endl;
+    std::cout << "Front: " << q.front() << std::endl;
+    std::cout << "Dequeue: " << q.dequeue() << std::endl;
+    std::cout << "New Front: " << q.front() << std::endl;
+    std::cout << "Size: " << q.size() << std::endl;
 
     return 0;
 }

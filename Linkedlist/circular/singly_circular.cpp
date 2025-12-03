@@ -1,5 +1,4 @@
 #include<iostream>
-using namespace std;
 
 template <typename T>
 class Node {
@@ -35,15 +34,15 @@ public:
 
     void display() const {
         if (empty()) {
-            cout << "List is empty\n";
+            std::cout << "List is empty\n";
             return;
         }
         Node<T>* temp = list_Head;
         do {
-            cout << " " << temp->retrieve();
+            std::cout << " " << temp->retrieve();
             temp = temp->next();
         } while (temp != list_Head);
-        cout << endl;
+        std::cout << std::endl;
     }
 
     int size() const {
@@ -196,10 +195,10 @@ int main() {
 
     l.display();
 
-    cout << "Size: " << l.size() << endl;
-    cout << "Count of 1: " << l.count(1) << endl;
-    cout << "Front: " << l.front() << endl;
-    cout << "End: " << l.end() << endl;
+    std::cout << "Size: " << l.size() << std::endl;
+    std::cout << "Count of 1: " << l.count(1) << std::endl;
+    std::cout << "Front: " << l.front() << std::endl;
+    std::cout << "End: " << l.end() << std::endl;
 
     l.erase(1);
 

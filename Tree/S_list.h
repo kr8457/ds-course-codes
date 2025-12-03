@@ -2,7 +2,6 @@
 #define S_LIST_H
 
 #include <iostream>
-using namespace std;
 
 template <typename T>
 class Node {
@@ -191,10 +190,10 @@ template <typename T>
 void S_list<T>::display() const {
     Node<T>* temp = list_Head;
     while (temp != nullptr) {
-        cout << temp->retrieve() << " ";
+        std::cout << temp->retrieve() << " ";
         temp = temp->next();
     }
-    cout << endl;
+    std::cout << std::endl;
 }
 
 #endif

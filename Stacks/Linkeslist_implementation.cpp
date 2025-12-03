@@ -1,5 +1,4 @@
 #include<iostream> // stack using doubly
-using namespace std;
 
 class Node {
 private:
@@ -118,11 +117,11 @@ int main() {
     s.push(20);
     s.push(30);
 
-    cout << "Top: " << s.top() << endl; // 30
-    cout << "Pop: " << s.pop() << endl; // 30
-    cout << "Top After Pop: " << s.top() << endl; // 20
+    std::cout << "Top: " << s.top() << std::endl; // 30
+    std::cout << "Pop: " << s.pop() << std::endl; // 30
+    std::cout << "Top After Pop: " << s.top() << std::endl; // 20
 
-    cout << "Size: " << s.size() << endl; 
+    std::cout << "Size: " << s.size() << std::endl; 
 
     return 0;
 }
