@@ -106,25 +106,16 @@ public:
 
    
 
-int main() {
-    // Build a tree with the name "Khalid Rafique"
-    Simple_tree<std::string> root("Khalid Rafique");
-    root.insert("Khalid");
-    root.insert("Rafique");
+   int main() {
+    Simple_tree<char> root('K');  
 
-    // Add individual letters as children of 'Khalid'
-    std::string first = "Khalid";
-    for (char c : first) {
-        std::string s(1, c);
-        root.child(1)->insert(s);
-    }
+  
+    root.insert('H');
+    root.insert('A');
+    root.insert('L');
 
-    // Add individual letters as children of 'Rafique'
-    std::string second = "Rafique";
-    for (char c : second) {
-        std::string s(1, c);
-        root.child(2)->insert(s);
-    }
+    root.child(2)->insert('I');
+    root.child(2)->insert('D');
 
     std::cout << "Depth-first traversal of name-tree: ";
     root.depth_first_traversal();
